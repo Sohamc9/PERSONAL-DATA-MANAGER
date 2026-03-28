@@ -1,4 +1,4 @@
-from expense import add_expense, view_expenses, delete_expense
+from expense import add_expense, view_expenses, delete_expense, expense_summary
 from utils import get_float, get_int
 from task import add_task, view_tasks, delete_task
 
@@ -8,10 +8,11 @@ def menu():
         print("1. Add Expense")
         print("2. View Expenses")
         print("3. Delete Expense")
-        print("4. Exit")
+        print("4. Expense Summary")
         print("5. Add Task")
         print("6. View Tasks")
         print("7. Delete Task")
+        print("8. Exit")
 
         choice = input("Enter your choice: ")
 
@@ -29,8 +30,7 @@ def menu():
             delete_expense(index)
 
         elif choice == "4":
-            print("Goodbye...")
-            break
+            expense_summary()
 
         elif choice == "5":
             title = input("Title: ")
@@ -44,6 +44,10 @@ def menu():
         elif choice == "7":
             index = get_int("Enter index to delete: ")
             delete_task(index)
+
+        elif choice == "8":
+            print("Exiting...")
+            break
 
         else:
             print("Invalid choice. Try again.")

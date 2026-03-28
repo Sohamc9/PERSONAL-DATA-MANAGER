@@ -2,13 +2,14 @@ import pandas as pd
 from storage import load_data , save_data
 
 FILE = "data/expenses.csv"
-COLUMNS = ["Date", "Amount", "category","Note"]
+COLUMNS = ["Date", "Amount", "Category","Note"]
 
 from datetime import date
 
 def add_expense(amount, category, note):
     if amount <= 0:
         print("Amount must be greater than 0.")
+
         return
     
     df = load_data(FILE, COLUMNS)
@@ -39,3 +40,17 @@ def delete_expense(index):
         print("Expense deleted")
     else:
         print("Invalid index.")
+
+
+def expense_summary():
+    df = load_data(FILE, COLUMNS)
+    if df.empty:
+        print("No expenses found")
+        return
+    
+    total = df["Amount"].sum()
+    print(f"\n==== Expense Summary ====")
+    print(f"Total Expenses: ₹{total}") 
+    print("\nExpenses by Category:")
+    print(df.groupby("Category")["Amount"].sum()).to_string()
+    input("\n Press Enter to continue...") 
